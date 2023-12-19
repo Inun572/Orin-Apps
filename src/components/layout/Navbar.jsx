@@ -118,7 +118,7 @@ const Navbar = () => {
                 />
               </svg>
               <span className="badge badge-sm bg-secondary indicator-item">
-                8
+                {0}
               </span>
             </div>
           </div>

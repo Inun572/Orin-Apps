@@ -115,9 +115,9 @@ const TodoList = () => {
             type="radio"
             name="my_tabs_2"
             role="tab"
-            className="tab"
+            className="tab hover:bg-slate-400"
             aria-label="All Notes"
-            checked
+            defaultChecked
           />
           <div
             role="tabpanel"
@@ -134,7 +134,7 @@ const TodoList = () => {
             type="radio"
             name="my_tabs_2"
             role="tab"
-            className="tab"
+            className="tab hover:bg-slate-400"
             aria-label="Unfinished"
           />
           <div
@@ -152,7 +152,7 @@ const TodoList = () => {
             type="radio"
             name="my_tabs_2"
             role="tab"
-            className="tab"
+            className="tab hover:bg-slate-400"
             aria-label="Finished"
           />
           <div

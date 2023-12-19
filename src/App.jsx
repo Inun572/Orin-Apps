@@ -1,36 +1,23 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import { useContext, useEffect } from 'react';
 import Layout from './components/layout';
-import Navbar from './components/layout/Navbar';
-import Home from './pages/Home';
-import TodoList from './pages/TodoList';
-import Login from './pages/Login';
-import BookApps from './pages/BookApp';
-import About from './pages/BookApp/About';
-import BookList from './pages/BookApp/BookList';
-import BookDetails from './pages/BookApp/BookDetails';
-import NotFound from './pages/NotFound';
-import Dashboard from './pages/BookApp/Dashboard';
+import Router from './Router';
+
+import { BooksContext } from './store/BooksContext';
+import { useLocalStorage } from './hooks/customHooks';
 
 export default function App() {
+  const books = useContext(BooksContext);
+  const [storedBooks, setStoredBooks] = useLocalStorage('books', books);
+
+  useEffect(() => {
+    setStoredBooks(books);
+  }, [books, setStoredBooks]);
+
   return (
-    <Layout>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/todolist" element={<TodoList />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/bookapps" element={<BookApps />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="about" element={<About />} />
-            <Route path="books" element={<BookList />} />
-            <Route path="books/:bookId" element={<BookDetails />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </Layout>
+    <BooksContext.Provider value={storedBooks}>
+      <Layout>
+        <Router />
+      </Layout>
+    </BooksContext.Provider>
   );
 }
